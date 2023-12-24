@@ -10,14 +10,19 @@
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.0.0",
+    "@react-three/drei": "^9.92.5",
+    "@react-three/fiber": "^8.15.12",
+    "leva": "^0.9.35",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "three": "^0.160.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/three": "^0.159.0",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
