@@ -3,7 +3,6 @@ import { GLTF } from 'three-stdlib'
 import { ObjectMap } from '@react-three/fiber'
 import { Environment, useEnvironment, useGLTF } from '@react-three/drei'
 
-
 type SpaceProps = {
     file: string
 }
@@ -11,7 +10,6 @@ type SpaceProps = {
 function MyHDR({ file }: HDRProps) {
     const hdr : THREE.Texture | THREE.CubeTexture | (THREE.CubeTexture & Record<"colorSpace", unknown>) = useEnvironment({files : file});
 
-    console.log(hdr)
     if (!hdr) // 에러처리 행성 필요 필요
         return (<></>);
     return (
@@ -28,7 +26,5 @@ function MySpace({ file }: SpaceProps) {
         </>
     )
 }
-
-
 
 export default MySpace
