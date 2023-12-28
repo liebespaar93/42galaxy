@@ -1,5 +1,5 @@
 
-import { MutableRefObject, useState } from 'react'
+import { MutableRefObject } from 'react'
 import * as THREE from 'three'
 import { GLTF } from 'three-stdlib'
 import { ObjectMap, ThreeEvent } from '@react-three/fiber'

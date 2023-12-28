@@ -1,16 +1,14 @@
 import * as THREE from 'three'
-import { GLTF } from 'three-stdlib'
-import { ObjectMap } from '@react-three/fiber'
-import { Environment, useEnvironment, useGLTF } from '@react-three/drei'
+import { Environment, useEnvironment } from '@react-three/drei'
 
 type SpaceProps = {
     file: string
 }
 
 function MyHDR({ file }: HDRProps) {
-    const hdr : THREE.Texture | THREE.CubeTexture | (THREE.CubeTexture & Record<"colorSpace", unknown>) = useEnvironment({files : file});
+    const hdr : THREE.Texture | undefined = useEnvironment({files : file});
 
-    if (!hdr) // 에러처리 행성 필요 필요
+    if (!hdr) // 에러처리 배경 필요
         return (<></>);
     return (
         <Environment map={hdr} background />

@@ -1,5 +1,4 @@
 import { Plane, Text } from "@react-three/drei";
-import { ReactNode } from "react";
 
 type GridProps = {
     size: number
@@ -14,6 +13,22 @@ type GridPlaneProps = {
 type GridTextProps = {
     position: [number, number, number]
     text: string
+}
+
+function MyGrid({ size, position }: GridProps) {
+    return (
+        <group position={position}>
+            <GridText position={[+size, 0, 0]} text="X+" />
+            <GridText position={[-size, 0, 0]} text="X-" />
+            <GridText position={[0, +size, 0]} text="Y+" />
+            <GridText position={[0, -size, 0]} text="Y-" />
+            <GridText position={[0, 0, +size]} text="Z+" />
+            <GridText position={[0, 0, -size]} text="Z-" />
+            <GridPlane rotation={[0.5 * Math.PI, 0, 0]} size={size} />
+            <GridPlane rotation={[0, 0, 0]} size={size} />
+            <GridPlane rotation={[0, 0.5 * Math.PI, 0]} size={size} />
+        </group>
+    );
 }
 
 function GridPlane({ rotation, size }: GridPlaneProps) {
@@ -40,22 +55,6 @@ function GridText({ position, text }: GridTextProps) {
             {text}
         </Text>
     )
-}
-
-function MyGrid({ size, position }: GridProps) {
-    return (
-        <group position={position}>
-            <GridText position={[+size, 0, 0]} text="X+" />
-            <GridText position={[-size, 0, 0]} text="X-" />
-            <GridText position={[0, +size, 0]} text="Y+" />
-            <GridText position={[0, -size, 0]} text="Y-" />
-            <GridText position={[0, 0, +size]} text="Z+" />
-            <GridText position={[0, 0, -size]} text="Z-" />
-            <GridPlane rotation={[0.5 * Math.PI, 0, 0]} size={size} />
-            <GridPlane rotation={[0, 0, 0]} size={size} />
-            <GridPlane rotation={[0, 0.5 * Math.PI, 0]} size={size} />
-        </group>
-    );
 }
 
 export default MyGrid
