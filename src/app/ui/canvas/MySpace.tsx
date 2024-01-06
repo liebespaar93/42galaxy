@@ -18,7 +18,7 @@ function MyHDR({ file }: HDRProps) {
 function MySpace({ file }: SpaceProps) {
     return (
         <>
-            <group position={[1, 1, 1]} rotation={[0, 0, 0]}>
+            <group position={[0, 0, 0]} rotation={[0, 0, 0]}>
                 <MyHDR file={file} />
             </group>
         </>

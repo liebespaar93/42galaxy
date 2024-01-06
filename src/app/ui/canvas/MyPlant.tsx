@@ -2,7 +2,7 @@
 import { MutableRefObject } from 'react'
 import * as THREE from 'three'
 import { GLTF } from 'three-stdlib'
-import { ObjectMap, ThreeEvent } from '@react-three/fiber'
+import { ObjectMap, ThreeEvent, useFrame } from '@react-three/fiber'
 import { Clone, useGLTF } from '@react-three/drei'
 
 import type { OrbitControls as OrbitControlsType } from 'three-stdlib'
@@ -16,6 +16,7 @@ export type PlantProps = {
     orbit_radius?: number | undefined
     position?: THREE.Vector3 | undefined
     rotation?: [number, number, number] | THREE.Euler | undefined
+    scale?: [number, number, number] | THREE.Vector3 | undefined
 }
 
 /**
@@ -24,19 +25,20 @@ export type PlantProps = {
  * @memo primitive 는 동일한 오브잭트 한번만 사용가능
  * @meno Clone 는 동일한 오브잭트 여러번 사용가능
  */
-function MyGLTF({ file }: GLTFProps) {
+function MyGLTF({ file, scale}: GLTFProps ) {
     const gltf: (GLTF & ObjectMap) | (GLTF & ObjectMap)[] = useGLTF(file);
 
+    console.log(gltf)
     if (!gltf) // 에러처리 행성 필요 필요
         return (<></>);
     return (
         <>
-            <Clone object={gltf.scene} />
+            <Clone object={gltf.scene} scale={scale} />
         </>
     )
 }
 
-function MyPlant({ orbitRef, file, name, position, rotation }: PlantProps) {
+function MyPlant({ orbitRef, file, name, position, rotation, scale }: PlantProps) {
     if (__DEBUG__)
         console.log("MyPlant")
 
@@ -52,15 +54,16 @@ function MyPlant({ orbitRef, file, name, position, rotation }: PlantProps) {
             calculate.set(0, 0, 0);
             calculate.add(orbitRef.current.object.position).sub(target)
             calculate.normalize().multiplyScalar(5).add(target)
+            
             orbitRef.current.object.position.copy(calculate)
+            
             orbitRef.current.target = target;
-            console.log(target)
         }
     }
 
     return (
         <group onClick={plant_info} >
-            <MyGLTF file={file} />
+            <MyGLTF file={file} scale={scale} />
         </group>)
 }
 

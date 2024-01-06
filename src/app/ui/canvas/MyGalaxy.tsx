@@ -18,13 +18,13 @@ function MyGalaxy({ orbitRef }: GalaxyProps) {
     return (
         <group>
             <MyGrid size={10} position={[0, 0, 0]} />
-            <MyArea level={0.1}>
-                <MyPlant orbitRef={orbitRef} orbit_radius={Math.PI * 0.3} file={"/assets/galaxy/cube_plant/cube_plant.gltf"} name={"Libft"}
+            <MyArea level={0}>
+                <MyPlant orbitRef={orbitRef} orbit_radius={Math.PI * 0} file={"/assets/galaxy/cube_plant/cube_plant.gltf"} name={"Libft"}
                     rotation={[0, 0, 0]} />
             </MyArea>
             <MyArea level={1}>
                 <MyPlant orbitRef={orbitRef} orbit_radius={Math.PI * 0.33} file={"/assets/galaxy/untitled_plant/untitled_plant.gltf"} name={"ft_printf"} />
-                <MyPlant orbitRef={orbitRef} orbit_radius={Math.PI * 1.0} file={"/assets/galaxy/untitled_plant/untitled_plant.gltf"} name={"get_next_line"} />
+                <MyPlant orbitRef={orbitRef} orbit_radius={Math.PI * 1.0} scale={[1,1,1]} file={"/assets/galaxy/gnl_plant/gnl_plant.gltf"} name={"get_next_line"} />
                 <MyPlant orbitRef={orbitRef} orbit_radius={Math.PI * 1.66} file={"/assets/galaxy/untitled_plant/untitled_plant.gltf"} name={"Born2beroot"} />
             </MyArea>
             <MyArea level={2}>

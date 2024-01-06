@@ -2,7 +2,7 @@
 
 import * as THREE from 'three'
 import { Canvas, useThree } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Stars } from '@react-three/drei'
 import React, { Suspense, useRef } from 'react'
 
 import { OrbitControls as OrbitControlsType } from 'three-stdlib'
@@ -21,10 +21,13 @@ function SpaceSetting() {
 
     return (
         <>
+            <color attach="background" args={['#000']}/>
             <OrbitControls ref={orbitRef} />
             <Suspense fallback={<text>Loading</text>} />
-            <MyGalaxy orbitRef={orbitRef} />
-            <MySpace file="/assets/space/nebula.hdr" />
+            <MyGalaxy orbitRef={orbitRef}/>
+            <Stars depth={200} count={10000} radius={100}/>
+            
+            {/* <MySpace file="/assets/space/nebula.hdr" /> */}
         </>
     )
 }
