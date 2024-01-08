@@ -4,16 +4,15 @@ import { OrbitControls as OrbitControlsType } from 'three-stdlib'
 import { useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { BufferGeometry, Material, Mesh, NormalBufferAttributes, Object3DEventMap } from 'three'
+import { PlantProps } from '../MyPlant'
 
 const __DEBUG__ = false
 
 type MoonProps = {
-    orbitRef: MutableRefObject<OrbitControlsType | null>
     displacementScale?: number
-    scale?: [number, number, number] | THREE.Vector3 | undefined
-}
+} & PlantProps
 
-function MyMoon({ orbitRef, displacementScale = 0.1, scale = [1,1,1] }: MoonProps) {
+function MyMoon({ orbitRef, displacementScale = 0.1, scale = [1,1,1] }: MoonProps ) {
     if (__DEBUG__) console.log("Moon")
 
     const [
@@ -25,7 +24,7 @@ function MyMoon({ orbitRef, displacementScale = 0.1, scale = [1,1,1] }: MoonProp
     const moonRef = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[], Object3DEventMap>>(new Mesh)
 
     useFrame(() => {
-        moonRef.current.rotation.y += 0.004166666666666667;
+        moonRef.current.rotation.y += 0.000;
     })
 
     return (

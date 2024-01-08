@@ -10,13 +10,13 @@ import MyMoon from '@/app/ui/canvas/solar/MyMoon'
 
 const __DEBUG__ = false
 
-type TestProps = {
+type SolarProps = {
     orbitRef: MutableRefObject<OrbitControlsType | null>
 }
 
-function MySolar({ orbitRef }: TestProps) {
+function MySolar({ orbitRef }: SolarProps) {
     if (__DEBUG__) console.log("Test")
-    
+
     return (
         <group>
             <MyGrid size={10} position={[0, 0, 0]} />
@@ -25,7 +25,7 @@ function MySolar({ orbitRef }: TestProps) {
                     rotation={[0, 0, 0]} /> */}
                 <MyEarth orbitRef={orbitRef} />
                 <MyArea level={0.5} >
-                    <MyMoon orbitRef={orbitRef}></MyMoon>
+                    <MyMoon scale={[0.5, 0.5, 0.5]} orbitRef={orbitRef} orbit_speed={0.01} displacementScale={0.05}/>
                 </MyArea>
             </MyArea>
         </group>

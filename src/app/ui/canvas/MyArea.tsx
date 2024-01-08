@@ -1,8 +1,9 @@
 
 import * as THREE from 'three'
-import React, { ReactElement, isValidElement } from 'react'
+import React, { ReactElement, isValidElement, useRef, useState } from 'react'
 
 import { PlantProps } from '@/app/ui/canvas/MyPlant'
+import { useFrame } from '@react-three/fiber'
 
 
 const __DEBUG__ = false
@@ -10,12 +11,9 @@ const __DEBUG__ = false
 type AreaProps = {
     children: ReactElement<PlantProps | AreaProps> | ReactElement<PlantProps | AreaProps>[]
     level: number
-    position?: THREE.Vector3 | undefined
-    orbit_radius?: number | undefined
-}
+} & AreaControlProps
 
 /**
- * 
  * @param param
  * @returns 
  * @memo isValidElement React element 인지 확인
@@ -27,17 +25,28 @@ function MyArea({ position, level, children }: AreaProps) {
     if (isValidElement(children)) children = [children]
 
     const orbit: ReactElement<PlantProps | AreaProps>[] = [];
+    const orbit_speed: number[] = [];
+    const group_revolution_Ref: React.MutableRefObject<THREE.Group<THREE.Object3DEventMap>>[] = [];
+    const group_rotation_Ref: React.MutableRefObject<THREE.Group<THREE.Object3DEventMap>>[] = [];
 
     children.map((value, index) => {
+        orbit_speed.push(value.props.orbit_speed ? value.props.orbit_speed : 0);
+        group_revolution_Ref.push(useRef(new THREE.Group))
+        group_rotation_Ref.push(useRef(new THREE.Group))
         orbit.push(
-            <group key={index} rotation={[0, value.props.orbit_radius ? -value.props.orbit_radius : 0, 0]}>
-                <group position={[0, 0, -level * 10]}>
+            <group ref={group_revolution_Ref[index]} key={index} rotation={[0, value.props.orbit_radius ? -value.props.orbit_radius : 0, 0]}>
+                <group ref={group_rotation_Ref[index]} position={[0, 0, -level * 10]}>
                     {value}
                 </group>
             </group>
         )
     })
-
+    useFrame(() => {
+        orbit_speed.map((value, index) => {
+            group_revolution_Ref[index].current.rotateY(value)
+            group_rotation_Ref[index].current.rotateY(-value)
+        })
+    })
     return (
         <group>
             <mesh position={position} rotation={[Math.PI * 0.5, 0, 0]} scale={[level * 10, level * 10, level * 10]}>

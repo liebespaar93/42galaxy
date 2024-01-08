@@ -7,7 +7,7 @@ import React, { Suspense, useRef } from 'react'
 
 import { OrbitControls as OrbitControlsType } from 'three-stdlib'
 
-import MySolar from '@/app/ui/canvas/MySolar'
+import MySolar from '@/app/ui/canvas/solar/MySolar'
 
 const __DEBUG__ = false
 

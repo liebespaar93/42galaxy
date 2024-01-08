@@ -11,13 +11,9 @@ const __DEBUG__ = false
 
 export type PlantProps = {
     orbitRef: MutableRefObject<OrbitControlsType | null>
-    file: string
     name?: string | undefined
-    orbit_radius?: number | undefined
-    position?: THREE.Vector3 | undefined
-    rotation?: [number, number, number] | THREE.Euler | undefined
     scale?: [number, number, number] | THREE.Vector3 | undefined
-}
+} & AreaControlProps
 
 /**
  * @param GLTFProps 
@@ -28,7 +24,6 @@ export type PlantProps = {
 function MyGLTF({ file, scale}: GLTFProps ) {
     const gltf: (GLTF & ObjectMap) | (GLTF & ObjectMap)[] = useGLTF(file);
 
-    console.log(gltf)
     if (!gltf) // 에러처리 행성 필요 필요
         return (<></>);
     return (
@@ -38,7 +33,7 @@ function MyGLTF({ file, scale}: GLTFProps ) {
     )
 }
 
-function MyPlant({ orbitRef, file, name, position, rotation, scale }: PlantProps) {
+function MyPlant({ orbitRef, file, name, position, rotation, scale }: PlantProps & GLTFProps) {
     if (__DEBUG__)
         console.log("MyPlant")
 

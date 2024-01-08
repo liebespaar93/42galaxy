@@ -38,7 +38,7 @@ function GridPlane({ rotation, size }: GridPlaneProps) {
             rotation={rotation}
             position={[0, 0, 0]}
         >
-            <meshStandardMaterial emissive="#ffffff" attach="material" color="#ffffff" wireframe />
+            <meshStandardMaterial opacity={0.01} emissive="#ffffff" attach="material" color="#ffffff" wireframe />
         </Plane>
     )
 }

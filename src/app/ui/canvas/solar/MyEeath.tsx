@@ -5,15 +5,16 @@ import { OrbitControls as OrbitControlsType } from 'three-stdlib'
 import { useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { BufferGeometry, Material, Mesh, NormalBufferAttributes, Object3DEventMap } from 'three'
+import { PlantProps } from '../MyPlant'
 
 const __DEBUG__ = false
 
 type EarthProps = {
     orbitRef: MutableRefObject<OrbitControlsType | null>
     displacementScale?: number
-}
+} & PlantProps
 
-function MyEarth({ orbitRef, displacementScale = 0.1 }: EarthProps) {
+function MyEarth({ orbit_speed, orbitRef, displacementScale = 0.1 }: EarthProps) {
     if (__DEBUG__) console.log("Test")
 
     const [
