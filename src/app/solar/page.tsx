@@ -7,11 +7,11 @@ import React, { Suspense, useRef } from 'react'
 
 import { OrbitControls as OrbitControlsType } from 'three-stdlib'
 
-import MyTest from '@/app/ui/canvas/MyTest'
+import MySolar from '@/app/ui/canvas/MySolar'
 
 const __DEBUG__ = false
 
-function TestSetting() {
+function SolarSetting() {
     if (__DEBUG__) console.log("SpaceSetting")
 
     const renderer = new THREE.WebGLRenderer();
@@ -22,7 +22,7 @@ function TestSetting() {
         <>
             <OrbitControls ref={orbitRef} />
             <Suspense fallback={<text>Loading</text>} />
-            <MyTest orbitRef={orbitRef} />
+            <MySolar orbitRef={orbitRef} />
             <color attach="background" args={['#000']} />
             <Stars depth={200} count={10000} radius={100} />
             {/* <MySpace file="/assets/space/nebula.hdr" /> */}
@@ -30,21 +30,21 @@ function TestSetting() {
             {/* 임시 라이트*/}
             <directionalLight intensity={2} position={[10, 0, 0]} scale={10}/>
             <directionalLight position={[-10, 0, 0]} scale={10} />
-            <directionalLight position={[0, 10, 0]} scale={10} />
+            {/* <directionalLight position={[0, 10, 0]} scale={10} />
             <directionalLight position={[0, -10, 0]} scale={10} />
             <directionalLight position={[0, 0, 10]} scale={10} />
-            <directionalLight position={[0, 0, -10]} scale={10} />
+            <directionalLight position={[0, 0, -10]} scale={10} /> */}
         </>
     )
 }
 
-export default function Test() {
+export default function Solar() {
     if (__DEBUG__) console.log("Space")
 
     return (
         <div className="h-full w-full">
             <Canvas className="h-full w-full">
-                <TestSetting />
+                <SolarSetting />
             </Canvas>
         </div>
     )

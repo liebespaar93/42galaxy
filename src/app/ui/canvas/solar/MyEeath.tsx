@@ -2,8 +2,6 @@ import React, { MutableRefObject, ReactElement, Ref, Suspense, isValidElement, u
 
 import { OrbitControls as OrbitControlsType } from 'three-stdlib'
 
-import MyGrid from '@/app/ui/canvas/MyGrid'
-import MyArea from '@/app/ui/canvas/MyArea'
 import { useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { BufferGeometry, Material, Mesh, NormalBufferAttributes, Object3DEventMap } from 'three'
@@ -38,18 +36,16 @@ function MyEarth({ orbitRef, displacementScale = 0.1 }: EarthProps) {
 
     return (
         <group>
-            <MyArea level={0}>
-                <mesh ref={earthRef}>
-                    <sphereGeometry args={[1, 128, 128]} />
-                    <meshPhongMaterial
-                        map={day_map}
-                        normalMap={normal_map}
-                        specularMap={specular_map}
-                        shininess={100}
-                        displacementMap={displacement_map}
-                        displacementScale={displacementScale} />
-                </mesh>
-            </MyArea>
+            <mesh ref={earthRef}>
+                <sphereGeometry args={[1, 128, 128]} />
+                <meshPhongMaterial
+                    map={day_map}
+                    normalMap={normal_map}
+                    specularMap={specular_map}
+                    shininess={100}
+                    displacementMap={displacement_map}
+                    displacementScale={displacementScale} />
+            </mesh>
         </group>
     )
 }
