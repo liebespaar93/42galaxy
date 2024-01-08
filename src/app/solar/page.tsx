@@ -28,12 +28,8 @@ function SolarSetting() {
             {/* <MySpace file="/assets/space/nebula.hdr" /> */}
 
             {/* 임시 라이트*/}
-            <directionalLight intensity={2} position={[10, 0, 0]} scale={10}/>
-            <directionalLight position={[-10, 0, 0]} scale={10} />
-            {/* <directionalLight position={[0, 10, 0]} scale={10} />
-            <directionalLight position={[0, -10, 0]} scale={10} />
-            <directionalLight position={[0, 0, 10]} scale={10} />
-            <directionalLight position={[0, 0, -10]} scale={10} /> */}
+            {/* <directionalLight intensity={2} position={[10, 0, 0]} scale={10}/>
+            <directionalLight position={[-10, 0, 0]} scale={10} /> */}
         </>
     )
 }
@@ -43,7 +39,7 @@ export default function Solar() {
 
     return (
         <div className="h-full w-full">
-            <Canvas className="h-full w-full">
+            <Canvas shadows="basic" className="h-full w-full">
                 <SolarSetting />
             </Canvas>
         </div>

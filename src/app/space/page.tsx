@@ -27,7 +27,7 @@ function SpaceSetting() {
             <MyGalaxy orbitRef={orbitRef}/>
             <Stars depth={200} count={10000} radius={100}/>
             
-            {/* <MySpace file="/assets/space/nebula.hdr" /> */}
+            <MySpace file="/assets/space/nebula.hdr" />
         </>
     )
 }

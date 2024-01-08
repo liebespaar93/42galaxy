@@ -8,8 +8,8 @@ import { useFrame } from '@react-three/fiber'
 
 const __DEBUG__ = false
 
-type AreaProps = {
-    children: ReactElement<PlantProps | AreaProps> | ReactElement<PlantProps | AreaProps>[]
+export type AreaProps = {
+    children?: ReactElement<PlantProps | AreaProps> | ReactElement<PlantProps | AreaProps>[]
     level: number
 } & AreaControlProps
 
@@ -29,7 +29,7 @@ function MyArea({ position, level, children }: AreaProps) {
     const group_revolution_Ref: React.MutableRefObject<THREE.Group<THREE.Object3DEventMap>>[] = [];
     const group_rotation_Ref: React.MutableRefObject<THREE.Group<THREE.Object3DEventMap>>[] = [];
 
-    children.map((value, index) => {
+    children?.map((value, index) => {
         orbit_speed.push(value.props.orbit_speed ? value.props.orbit_speed : 0);
         group_revolution_Ref.push(useRef(new THREE.Group))
         group_rotation_Ref.push(useRef(new THREE.Group))
@@ -50,7 +50,7 @@ function MyArea({ position, level, children }: AreaProps) {
     return (
         <group>
             <mesh position={position} rotation={[Math.PI * 0.5, 0, 0]} scale={[level * 10, level * 10, level * 10]}>
-                <ringGeometry args={[1, 1.01, 64]} />
+                <ringGeometry args={[1, 1 + (level * 0.01), 64]} />
                 <meshNormalMaterial side={THREE.DoubleSide} />
             </mesh>
             {orbit}

@@ -1,6 +1,5 @@
-import React, { MutableRefObject, ReactElement, Ref, Suspense, isValidElement, useRef } from 'react'
+import React, { useRef } from 'react'
 
-import { OrbitControls as OrbitControlsType } from 'three-stdlib'
 import { useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { BufferGeometry, Material, Mesh, NormalBufferAttributes, Object3DEventMap } from 'three'
@@ -12,24 +11,24 @@ type MoonProps = {
     displacementScale?: number
 } & PlantProps
 
-function MyMoon({ orbitRef, displacementScale = 0.1, scale = [1,1,1] }: MoonProps ) {
+function MyMoon({ children, orbitRef, displacementScale = 0.1, scale = [1, 1, 1], rotation }: MoonProps) {
     if (__DEBUG__) console.log("Moon")
 
     const [
         day_map,
     ] = useTexture([
-        "/assets/galaxy/moon/Textures/8k_moon_day_map.webp",
+        "/assets/solar/plant/moon/Textures/8k_moon_day_map.webp",
     ])
 
     const moonRef = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[], Object3DEventMap>>(new Mesh)
 
     useFrame(() => {
-        moonRef.current.rotation.y += 0.000;
+        if (rotation)
+            moonRef.current.rotation.y += rotation.y
     })
-
     return (
         <group>
-            <mesh ref={moonRef} scale={scale}>
+            <mesh ref={moonRef} receiveShadow castShadow scale={scale}>
                 <sphereGeometry args={[1, 128, 128]} />
                 <meshPhongMaterial
                     map={day_map}
@@ -37,6 +36,7 @@ function MyMoon({ orbitRef, displacementScale = 0.1, scale = [1,1,1] }: MoonProp
                     displacementMap={day_map}
                     displacementScale={displacementScale} />
             </mesh>
+            {children}
         </group>
     )
 }

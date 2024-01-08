@@ -1,4 +1,4 @@
-import React, { MutableRefObject, ReactElement, Ref, Suspense, isValidElement, useRef } from 'react'
+import React, { MutableRefObject, useRef } from 'react'
 
 import { OrbitControls as OrbitControlsType } from 'three-stdlib'
 
@@ -14,7 +14,7 @@ type EarthProps = {
     displacementScale?: number
 } & PlantProps
 
-function MyEarth({ orbit_speed, orbitRef, displacementScale = 0.1 }: EarthProps) {
+function MyEarth({ children, orbit_speed, orbitRef, displacementScale = 0.1, rotation }: EarthProps) {
     if (__DEBUG__) console.log("Test")
 
     const [
@@ -23,21 +23,22 @@ function MyEarth({ orbit_speed, orbitRef, displacementScale = 0.1 }: EarthProps)
         specular_map,
         displacement_map,
     ] = useTexture([
-        "/assets/galaxy/earth/Textures/8k_earth_day_map.webp",
-        "/assets/galaxy/earth/Textures/8k_earth_normal_map.webp",
-        "/assets/galaxy/earth/Textures/8k_earth_specular_map.webp",
-        "/assets/galaxy/earth/Textures/8k_earth_displacement_map.jpg",
+        "/assets/solar/plant/earth/Textures/8k_earth_day_map.webp",
+        "/assets/solar/plant/earth/Textures/8k_earth_normal_map.webp",
+        "/assets/solar/plant/earth/Textures/8k_earth_specular_map.webp",
+        "/assets/solar/plant/earth/Textures/8k_earth_displacement_map.jpg",
     ])
 
     const earthRef = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[], Object3DEventMap>>(new Mesh)
 
     useFrame(() => {
-        earthRef.current.rotation.y += 0.004166666666666667;
+        if (rotation)
+            earthRef.current.rotation.y += rotation.y;
     })
 
     return (
         <group>
-            <mesh ref={earthRef}>
+            <mesh ref={earthRef} castShadow receiveShadow >
                 <sphereGeometry args={[1, 128, 128]} />
                 <meshPhongMaterial
                     map={day_map}
@@ -45,8 +46,10 @@ function MyEarth({ orbit_speed, orbitRef, displacementScale = 0.1 }: EarthProps)
                     specularMap={specular_map}
                     shininess={100}
                     displacementMap={displacement_map}
-                    displacementScale={displacementScale} />
+                    displacementScale={displacementScale}
+                />
             </mesh>
+            {children}
         </group>
     )
 }
