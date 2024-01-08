@@ -19,11 +19,14 @@ function MyEarth({ children, orbit_speed, orbitRef, displacementScale = 0.1, rot
 
     const [
         day_map,
+        nightmap_map,
         normal_map,
         specular_map,
         displacement_map,
+
     ] = useTexture([
         "/assets/solar/plant/earth/Textures/8k_earth_day_map.webp",
+        "/assets/solar/plant/earth/Textures/8k_earth_nightmap.jpeg",
         "/assets/solar/plant/earth/Textures/8k_earth_normal_map.webp",
         "/assets/solar/plant/earth/Textures/8k_earth_specular_map.webp",
         "/assets/solar/plant/earth/Textures/8k_earth_displacement_map.jpg",
@@ -47,6 +50,9 @@ function MyEarth({ children, orbit_speed, orbitRef, displacementScale = 0.1, rot
                     shininess={100}
                     displacementMap={displacement_map}
                     displacementScale={displacementScale}
+                    emissiveMap={nightmap_map}
+                    emissive={0xf9e25c}
+                    emissiveIntensity={1.3}
                 />
             </mesh>
             {children}
