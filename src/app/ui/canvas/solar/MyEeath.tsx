@@ -7,7 +7,7 @@ import { useFrame } from '@react-three/fiber'
 import { BufferGeometry, Material, Mesh, NormalBufferAttributes, Object3DEventMap } from 'three'
 import { PlantProps } from '../MyPlant'
 
-const __DEBUG__ = false
+const __DEBUG__ = true
 
 type EarthProps = {
     orbitRef: MutableRefObject<OrbitControlsType | null>
@@ -15,7 +15,7 @@ type EarthProps = {
 } & PlantProps
 
 function MyEarth({ children, orbit_speed, orbitRef, displacementScale = 0.1, rotation }: EarthProps) {
-    if (__DEBUG__) console.log("Test")
+    if (__DEBUG__) console.log("MyEarth")
 
     const [
         day_map,

@@ -4,11 +4,14 @@ import { BufferGeometry, DoubleSide, Material, Mesh, NormalBufferAttributes, Obj
 import { PlantProps } from "../MyPlant";
 import { useFrame } from "@react-three/fiber";
 
+const __DEBUG__ = true
+
 type SunProps = {
     displacementScale?: number
 } & PlantProps
 
 function MySun({ children, orbitRef, displacementScale = 0.1, scale = [1, 1, 1], rotation }: SunProps) {
+    if (__DEBUG__) console.log("MySolar")
 
     const [day_map] = useTexture([
         "/assets/solar/plant/sun/2k_sun.jpeg"

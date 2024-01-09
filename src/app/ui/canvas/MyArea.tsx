@@ -6,7 +6,7 @@ import { PlantProps } from '@/app/ui/canvas/MyPlant'
 import { useFrame } from '@react-three/fiber'
 
 
-const __DEBUG__ = false
+const __DEBUG__ = true
 
 export type AreaProps = {
     children?: ReactElement<PlantProps | AreaProps> | ReactElement<PlantProps | AreaProps>[]
@@ -20,7 +20,7 @@ export type AreaProps = {
  * @tip array 는 React element 아니다
  */
 function MyArea({ position, level, children }: AreaProps) {
-    if (__DEBUG__) console.log("Area")
+    if (__DEBUG__) console.log("MyArea")
 
     if (isValidElement(children)) children = [children]
 

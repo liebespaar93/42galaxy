@@ -1,5 +1,7 @@
 import { Plane, Text } from "@react-three/drei";
 
+const __DEBUG__ = true
+
 type GridProps = {
     size: number
     position: [number, number, number]
@@ -16,6 +18,7 @@ type GridTextProps = {
 }
 
 function MyGrid({ size, position }: GridProps) {
+    if (__DEBUG__) console.log("MyGrid")
     return (
         <group position={position}>
             <GridText position={[+size, 0, 0]} text="X+" />

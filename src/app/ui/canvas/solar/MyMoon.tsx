@@ -5,14 +5,14 @@ import { useFrame } from '@react-three/fiber'
 import { BufferGeometry, Material, Mesh, NormalBufferAttributes, Object3DEventMap } from 'three'
 import { PlantProps } from '../MyPlant'
 
-const __DEBUG__ = false
+const __DEBUG__ = true
 
 type MoonProps = {
     displacementScale?: number
 } & PlantProps
 
 function MyMoon({ children, orbitRef, displacementScale = 0.1, scale = [1, 1, 1], rotation }: MoonProps) {
-    if (__DEBUG__) console.log("Moon")
+    if (__DEBUG__) console.log("MyMoon")
 
     const [
         day_map,

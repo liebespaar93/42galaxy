@@ -9,10 +9,10 @@ import { OrbitControls as OrbitControlsType } from 'three-stdlib'
 
 import MySolar from '@/app/ui/canvas/solar/MySolar'
 
-const __DEBUG__ = false
+const __DEBUG__ = true
 
 function SolarSetting() {
-    if (__DEBUG__) console.log("SpaceSetting")
+    if (__DEBUG__) console.log("SolarSetting")
 
     const renderer = new THREE.WebGLRenderer();
     const { camera } = useThree()
@@ -35,7 +35,7 @@ function SolarSetting() {
 }
 
 export default function Solar() {
-    if (__DEBUG__) console.log("Space")
+    if (__DEBUG__) console.log("===Solar===")
 
     return (
         <div className="h-full w-full">

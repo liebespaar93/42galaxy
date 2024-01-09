@@ -10,7 +10,7 @@ import { OrbitControls as OrbitControlsType } from 'three-stdlib'
 import MySpace from '@/app/ui/canvas/MySpace'
 import MyGalaxy from '@/app/ui/canvas/MyGalaxy'
 
-const __DEBUG__ = false
+const __DEBUG__ = true
 
 function SpaceSetting() {
     if (__DEBUG__) console.log("SpaceSetting")

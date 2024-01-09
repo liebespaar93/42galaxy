@@ -7,7 +7,7 @@ import { Clone, useGLTF } from '@react-three/drei'
 import type { OrbitControls as OrbitControlsType } from 'three-stdlib'
 import { AreaProps } from './MyArea'
 
-const __DEBUG__ = false
+const __DEBUG__ = true
 
 export type PlantProps = {
     children?: ReactElement<PlantProps | AreaProps> | ReactElement<PlantProps | AreaProps>[]

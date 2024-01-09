@@ -14,8 +14,8 @@ type TestProps = {
 }
 
 function MyTest({ orbitRef }: TestProps) {
-    if (__DEBUG__) console.log("Test")
-    
+    if (__DEBUG__) console.log("MyTest")
+
     return (
         <group>
             <MyGrid size={10} position={[0, 0, 0]} />
