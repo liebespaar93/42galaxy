@@ -20,7 +20,7 @@ function MyGalaxy({ orbitRef }: GalaxyProps) {
             <MyGrid size={10} position={[0, 0, 0]} />
             <MyArea level={0}>
                 <MyPlant orbitRef={orbitRef} orbit_radius={Math.PI * 0} file={"/assets/galaxy/cube_plant/cube_plant.gltf"} name={"Libft"}
-                    rotation={{ x: 0, y: 0, z: 0 }} />
+                    rotation={{ x: 0.1, y: 0.1, z: 0 }} />
             </MyArea>
             <MyArea level={1}>
                 <MyPlant orbitRef={orbitRef} orbit_radius={Math.PI * 0.33} file={"/assets/galaxy/untitled_plant/untitled_plant.gltf"} name={"ft_printf"} />

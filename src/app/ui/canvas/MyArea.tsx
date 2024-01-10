@@ -26,16 +26,14 @@ function MyArea({ position, level, children }: AreaProps) {
 
     const orbit: ReactElement<PlantProps | AreaProps>[] = [];
     const orbit_speed: number[] = [];
-    const group_revolution_Ref: React.MutableRefObject<THREE.Group<THREE.Object3DEventMap>>[] = [];
-    const group_rotation_Ref: React.MutableRefObject<THREE.Group<THREE.Object3DEventMap>>[] = [];
+    const group_revolution_Ref: (THREE.Group | null)[] = [];
+    const group_rotation_Ref: (THREE.Group | null)[] = [];
 
     children?.map((value, index) => {
         orbit_speed.push(value.props.orbit_speed ? value.props.orbit_speed : 0);
-        group_revolution_Ref.push(useRef(new THREE.Group))
-        group_rotation_Ref.push(useRef(new THREE.Group))
         orbit.push(
-            <group ref={group_revolution_Ref[index]} key={index} rotation={[0, value.props.orbit_radius ? -value.props.orbit_radius : 0, 0]}>
-                <group ref={group_rotation_Ref[index]} position={[0, 0, -level * 10]}>
+            <group ref={(element) => group_revolution_Ref.push(element)} key={index} rotation={[0, value.props.orbit_radius ? -value.props.orbit_radius : 0, 0]}>
+                <group ref={(element) => group_rotation_Ref.push(element)} position={[0, 0, -level * 10]}>
                     {value}
                 </group>
             </group>
@@ -43,8 +41,8 @@ function MyArea({ position, level, children }: AreaProps) {
     })
     useFrame(() => {
         orbit_speed.map((value, index) => {
-            group_revolution_Ref[index].current.rotateY(value)
-            group_rotation_Ref[index].current.rotateY(-value)
+            group_revolution_Ref[index]?.rotateY(value)
+            group_rotation_Ref[index]?.rotateY(-value)
         })
     })
     return (
