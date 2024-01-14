@@ -1,19 +1,17 @@
-import { BufferGeometry, Euler, Material, Mesh, NormalBufferAttributes, Object3DEventMap, Vector3 } from 'three'
-import { MutableRefObject, ReactElement, useRef } from 'react'
+import { Group, Object3DEventMap, Vector3 } from 'three'
+import { ReactElement, useRef } from 'react'
 import { GLTF } from 'three-stdlib'
-import { ObjectMap, ThreeEvent, useFrame } from '@react-three/fiber'
+import { ObjectMap, useFrame } from '@react-three/fiber'
 import { Clone, useGLTF } from '@react-three/drei'
 
-import type { OrbitControls as OrbitControlsType } from 'three-stdlib'
 import { AreaProps } from './MyArea'
-
+import { cameraSlice, useDispatch } from '@/lib/redux'
 const __DEBUG__ = true
 
 export type PlantProps = {
     children?: ReactElement<PlantProps | AreaProps> | ReactElement<PlantProps | AreaProps>[]
-    orbitRef: MutableRefObject<OrbitControlsType | null>
     name?: string | undefined
-    scale?: [number, number, number] | THREE.Vector3 | undefined
+    scale?: [number, number, number] | Vector3 | undefined
 } & AreaControlProps
 
 /**
@@ -34,42 +32,23 @@ function MyGLTF({ file, scale }: GLTFProps) {
     )
 }
 
-function MyPlant({ children, orbitRef, file, name, position, rotation, scale }: PlantProps & GLTFProps) {
+function MyPlant({ children, file, name, position, rotation, scale }: PlantProps & GLTFProps) {
     if (__DEBUG__)
         console.log("MyPlant")
 
-    const plantRef = useRef<Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[], Object3DEventMap>>(new Mesh)
+    const plantRef = useRef<Group<Object3DEventMap>>(new Group)
 
-    function plant_info(event: ThreeEvent<MouseEvent>) {
-        const target = new Vector3;
-        const calculate = new Vector3(0, 0, 0);
+    const dispatch = useDispatch()
+    const targetRef = () => (
+        dispatch(cameraSlice.actions.set_targetRef(plantRef)))
 
-        event.stopPropagation();
-        event.eventObject.getWorldPosition(target);
-        if (orbitRef && orbitRef.current) {
-            // 나중에 lerp 하게 움직이는 카메라 필요
-            calculate.set(0, 0, 0);
-            calculate.add(orbitRef.current.object.position).sub(target)
-            calculate.normalize().multiplyScalar(5).add(target)
-
-            orbitRef.current.object.position.copy(calculate)
-
-            orbitRef.current.target = target;
-        }
-    }
-    new Vector3
     useFrame(() => {
         if (rotation) // 자전
-        {
-            plantRef.current.rotation.x += rotation.x
             plantRef.current.rotation.y += rotation.y
-            plantRef.current.rotation.z += rotation.z
-        }
     })
 
-
     return (
-        <group onClick={plant_info} >
+        <group ref={plantRef} onClick={targetRef} >
             <MyGLTF file={file} scale={scale} />
             {children}
         </group>)

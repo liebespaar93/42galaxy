@@ -22,7 +22,7 @@ function MyTest({ orbitRef }: TestProps) {
             <MyArea level={0}>
                 {/* <MyPlant orbitRef={orbitRef} orbit_radius={Math.PI * 0.3} file={"/assets/galaxy/gnl_plant/gnl_plant.gltf"} name={"Libft"}
                     rotation={[0, 0, 0]} /> */}
-                <MyEarth orbitRef={orbitRef} />
+                <MyEarth/>
             </MyArea>
         </group>
     )

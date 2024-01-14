@@ -1,6 +1,6 @@
 
 import * as THREE from 'three'
-import React, { ReactElement, isValidElement, useRef, useState } from 'react'
+import React, { ReactElement, isValidElement } from 'react'
 
 import { PlantProps } from '@/app/ui/canvas/MyPlant'
 import { useFrame } from '@react-three/fiber'
