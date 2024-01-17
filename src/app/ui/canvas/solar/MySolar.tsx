@@ -15,7 +15,7 @@ function MySolar({ }: SolarProps) {
     if (__DEBUG__) console.log("==MySolar==")
 
     return (
-        <group position={[10,0,10]}>
+        <group position={[10, 0, 10]}>
             {/* <MyGrid size={10} position={[0, 0, 0]} /> */}
             <MyArea level={0}>
                 <MySun scale={[2, 2, 2]} rotation={{ x: 0, y: 0.001, z: 0 }} >
@@ -28,7 +28,7 @@ function MySolar({ }: SolarProps) {
                                     rotation={{ x: 0, y: 0.02, z: 0 }} />
                             </MyArea>
                             <MyArea level={0.2} orbit_speed={0.001}>
-                                <MyPlant orbit_speed={0.01} rotation={{ x: 0.2, y: 0.01, z: 0 }} rotate={[0,0,Math.PI * 0.5]} scale={[0.5,0.5,0.5]} file='/assets/solar/station/rocket/rocket.gltf' />
+                                <MyPlant orbit_speed={0.01} rotation={{ x: 0.2, y: 0.01, z: 0 }} rotate={[0, 0, Math.PI * 0.5]} scale={[0.5, 0.5, 0.5]} file='/assets/solar/station/rocket/rocket.gltf' />
                             </MyArea>
                         </MyEarth>
                     </MyArea>

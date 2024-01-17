@@ -9,10 +9,9 @@ import MyArea from '@/app/ui/canvas/MyArea'
 const __DEBUG__ = true
 
 type GalaxyProps = {
-    orbitRef: MutableRefObject<OrbitControlsType | null>
 }
 
-function MyGalaxy({ orbitRef }: GalaxyProps) {
+function MyGalaxy({ }: GalaxyProps) {
     if (__DEBUG__) console.log("==MyGalaxy==")
 
     return (
@@ -20,7 +19,7 @@ function MyGalaxy({ orbitRef }: GalaxyProps) {
             <MyGrid size={10} position={[0, 0, 0]} />
             <MyArea level={0}>
                 <MyPlant orbit_radius={Math.PI * 0} file={"/assets/galaxy/cube_plant/cube_plant.gltf"} name={"Libft"}
-                    rotation={{ x: 0.1, y: 0.1, z: 0 }} />
+                    rotation={{ x: 0.01, y: 0.01, z: 0 }} />
             </MyArea>
             <MyArea level={1}>
                 <MyPlant orbit_radius={Math.PI * 0.33} file={"/assets/galaxy/untitled_plant/untitled_plant.gltf"} name={"ft_printf"} />

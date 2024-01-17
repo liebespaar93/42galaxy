@@ -28,7 +28,7 @@ function MyGLTF({ file, scale, rotate }: GLTFProps) {
         return (<></>);
     return (
         <>
-            <Clone castShadow receiveShadow object={gltf.scene} scale={scale} rotation={rotate}/>
+            <Clone castShadow receiveShadow object={gltf.scene} scale={scale} rotation={rotate} />
         </>
     )
 }
@@ -37,7 +37,7 @@ function MyPlant({ children, file, name, position, rotation, scale, rotate }: Pl
     if (__DEBUG__)
         console.log("MyPlant")
 
-    const plantRef = useRef<Group<Object3DEventMap>>(new Group)
+    const plantRef = useRef<Group>(new Group)
 
     const dispatch = useDispatch()
     const targetRef = () => (
@@ -45,14 +45,17 @@ function MyPlant({ children, file, name, position, rotation, scale, rotate }: Pl
 
     useFrame(() => {
         if (rotation) // 자전
-        plantRef.current.rotation.y += rotation.y
+            plantRef.current.rotation.y += rotation.y
     })
 
     return (
-        <group ref={plantRef} scale={scale} onClick={targetRef} >
-            <MyGLTF file={file} rotate={rotate}/>
+        <>
+            <group ref={plantRef} scale={scale} onClick={targetRef} >
+                <MyGLTF file={file} rotate={rotate} />
+            </group>
             {children}
-        </group>)
+        </>
+    )
 }
 
 export default MyPlant
