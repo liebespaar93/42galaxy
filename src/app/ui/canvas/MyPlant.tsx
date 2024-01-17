@@ -12,6 +12,7 @@ export type PlantProps = {
     children?: ReactElement<PlantProps | AreaProps> | ReactElement<PlantProps | AreaProps>[]
     name?: string | undefined
     scale?: [number, number, number] | Vector3 | undefined
+    rotate?: [number, number, number] | THREE.Euler | undefined
 } & AreaControlProps
 
 /**
@@ -20,19 +21,19 @@ export type PlantProps = {
  * @memo primitive 는 동일한 오브잭트 한번만 사용가능
  * @meno Clone 는 동일한 오브잭트 여러번 사용가능
  */
-function MyGLTF({ file, scale }: GLTFProps) {
+function MyGLTF({ file, scale, rotate }: GLTFProps) {
     const gltf: (GLTF & ObjectMap) | (GLTF & ObjectMap)[] = useGLTF(file);
 
     if (!gltf) // 에러처리 행성 필요 필요
         return (<></>);
     return (
         <>
-            <Clone castShadow receiveShadow object={gltf.scene} scale={scale} />
+            <Clone castShadow receiveShadow object={gltf.scene} scale={scale} rotation={rotate}/>
         </>
     )
 }
 
-function MyPlant({ children, file, name, position, rotation, scale }: PlantProps & GLTFProps) {
+function MyPlant({ children, file, name, position, rotation, scale, rotate }: PlantProps & GLTFProps) {
     if (__DEBUG__)
         console.log("MyPlant")
 
@@ -44,12 +45,12 @@ function MyPlant({ children, file, name, position, rotation, scale }: PlantProps
 
     useFrame(() => {
         if (rotation) // 자전
-            plantRef.current.rotation.y += rotation.y
+        plantRef.current.rotation.y += rotation.y
     })
 
     return (
         <group ref={plantRef} scale={scale} onClick={targetRef} >
-            <MyGLTF file={file} />
+            <MyGLTF file={file} rotate={rotate}/>
             {children}
         </group>)
 }

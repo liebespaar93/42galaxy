@@ -1,6 +1,7 @@
 type GLTFProps = {
     file: string
     scale?: [number, number, number] | THREE.Vector3 | undefined
+    rotate?: [number, number, number] | THREE.Euler | undefined
 }
 
 type HDRProps = {
