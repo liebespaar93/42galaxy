@@ -26,8 +26,3 @@ export function incrementIfOddAsync(target: Vector3): ReduxThunkAction {
     dispatch(cameraSlice.actions.position(target));
   };
 }
-
-export function setOrbitRef(orbitRef: React.MutableRefObject<OrbitControlsType>)
-{
-  return orbitRef
-}

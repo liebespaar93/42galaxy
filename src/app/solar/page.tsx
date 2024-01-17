@@ -18,12 +18,12 @@ function SolarSetting() {
 
     const renderer = new THREE.WebGLRenderer();
     const { camera }: RootState = useThree();
-    const orbitRef = useRef<OrbitControlsType>(new OrbitControlsType(camera, renderer.domElement));
+    const orbitRef: React.MutableRefObject<OrbitControlsType> = useRef<OrbitControlsType>(new OrbitControlsType(camera, renderer.domElement));
 
     return (
         <>
-            <MyApproach />
             <OrbitControls ref={orbitRef} />
+            <MyApproach orbitRef={orbitRef}/>
             <Suspense fallback={<text>Loading</text>} />
             <MySolar />
             <color attach="background" args={['#000']} />
@@ -37,11 +37,11 @@ export default function Solar() {
 
     return (
         <div className="h-full w-full">
-            <Providers>
-                <Canvas shadows="basic" className="h-full w-full">
+            <Canvas shadows="basic" className="h-full w-full">
+                <Providers>
                     <SolarSetting />
-                </Canvas>
-            </Providers>
+                </Providers>
+            </Canvas>
         </div>
     )
 }

@@ -34,19 +34,21 @@ function MyMoon({ children, displacementScale = 0.1, scale = [1, 1, 1], rotation
             moonRef.current.rotation.y += rotation.y
     })
     return (
-        <group ref={moonRef} >
+        <group>
             <MyHover setHover={setHover}>
-                <mesh receiveShadow castShadow scale={scale} onClick={targetRef}>
-                    <sphereGeometry args={[1, 128, 128]} />
-                    <meshPhongMaterial
-                        map={day_map}
-                        shininess={100}
-                        displacementMap={day_map}
-                        displacementScale={displacementScale}
-                        emissiveMap={day_map}
-                        emissive={0xf9e25c}
-                        emissiveIntensity={hover ? 10 : 0.0} />
-                </mesh>
+                <group ref={moonRef} scale={scale} onClick={targetRef}>
+                    <mesh receiveShadow castShadow>
+                        <sphereGeometry args={[1, 128, 128]} />
+                        <meshPhongMaterial
+                            map={day_map}
+                            shininess={100}
+                            displacementMap={day_map}
+                            displacementScale={displacementScale}
+                            emissiveMap={day_map}
+                            emissive={0xf9e25c}
+                            emissiveIntensity={hover ? 10 : 0.0} />
+                    </mesh>
+                </group>
             </MyHover>
             {children}
         </group>

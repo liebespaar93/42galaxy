@@ -1,12 +1,14 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import { incrementAsync } from "./thunks";
-import { Group, Mesh, Vector3 } from "three";
-import { MutableRefObject, } from "react";
+import { Group, Mesh, Object3DEventMap, Vector3, WebGL1Renderer } from "three";
+import { MutableRefObject, useRef, } from "react";
+
 import { OrbitControls as OrbitControlsType } from 'three-stdlib'
+import { RootState } from "@react-three/fiber";
 
 export interface CameraSliceState {
   position: Vector3,
-  targetRef?: MutableRefObject<Group>,
+  targetRef?: MutableRefObject<Group<Object3DEventMap>>,
   status: "free" | "lookat" | "failed",
 }
 
@@ -28,7 +30,7 @@ export const cameraSlice = createSlice({
     free: (state) => {
       state.status = "free"
     },
-    set_targetRef: (state, action: PayloadAction<MutableRefObject<Group>>) => {
+    set_targetRef: (state, action: PayloadAction<MutableRefObject<Group<Object3DEventMap>>>) => {
       if (state.targetRef?.current == action.payload.current)
         state.status = state.status == "lookat" ? "free" : "lookat"
       else

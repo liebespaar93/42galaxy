@@ -1,6 +1,6 @@
 import { useTexture } from "@react-three/drei";
 import { useRef, useState } from "react";
-import { Group } from "three";
+import { DoubleSide, Group } from "three";
 import { PlantProps } from "../MyPlant";
 import { useFrame } from "@react-three/fiber";
 import MyHover from "../control/MyHover";
@@ -31,20 +31,23 @@ function MySun({ children, displacementScale = 0.1, scale = [1, 1, 1], rotation 
     })
 
     return (
-        <group ref={sunRef}>
+        <group>
             <MyHover setHover={setHover}>
-            <mesh scale={scale} onClick={targetRef}>
-                <sphereGeometry args={[1, 128, 128]} />
-                <meshPhongMaterial
-                    map={day_map}
-                    emissiveMap={day_map}
-                    emissiveIntensity={hover? 10 : 1}
-                    emissive="#ffffff"
-                    displacementMap={day_map}
-                    displacementScale={displacementScale}
-                />
-                <pointLight castShadow receiveShadow intensity={500} position={[0, 0, 0]} />
-            </mesh>
+                <group ref={sunRef} scale={scale} onClick={targetRef}>
+                    <mesh>
+                        <sphereGeometry args={[1, 128, 128]} />
+                        <meshPhongMaterial
+                            map={day_map}
+                            emissiveMap={day_map}
+                            emissiveIntensity={hover ? 10 : 1}
+                            emissive="#ffffff"
+                            displacementMap={day_map}
+                            displacementScale={displacementScale}
+                            side={DoubleSide}
+                        />
+                        <pointLight castShadow receiveShadow intensity={500} position={[0, 0, 0]} />
+                    </mesh>
+                </group>
             </MyHover>
             {children}
         </group>

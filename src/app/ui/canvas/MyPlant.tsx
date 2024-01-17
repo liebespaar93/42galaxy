@@ -48,8 +48,8 @@ function MyPlant({ children, file, name, position, rotation, scale }: PlantProps
     })
 
     return (
-        <group ref={plantRef} onClick={targetRef} >
-            <MyGLTF file={file} scale={scale} />
+        <group ref={plantRef} scale={scale} onClick={targetRef} >
+            <MyGLTF file={file} />
             {children}
         </group>)
 }
